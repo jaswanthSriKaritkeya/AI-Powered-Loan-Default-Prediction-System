@@ -24,11 +24,7 @@ def predict(request : LoanRequest):
 
     risk = risk_bucket(probablity=prob)
 
-    explanation_df = get_shap_explainer(loan_data)
-
-    explanations = explanation_df[
-        ["Feature", "Borrower Value", "Shap Values"]
-    ].to_dict(orient="records")
+    explanations = get_shap_explainer(loan_data)
 
     return {
         "prediction": prediction_res["prediction"],
