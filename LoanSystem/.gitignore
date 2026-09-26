@@ -1,4 +1,4 @@
 notebooks
 data
 backend/__pycache__
-backend/.env
+backend/env
