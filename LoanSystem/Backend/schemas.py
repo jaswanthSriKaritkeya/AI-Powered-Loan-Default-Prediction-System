@@ -24,3 +24,11 @@ class LifecycleRequest(BaseModel):
     loan_data: LoanRequest
     months: int = 6
     scenario: str = "stable"
+
+class LoanAssessmentRequest(BaseModel):
+    LoanAmount: int
+    InterestRate: float
+    LoanTerm: int
+    LoanPurpose: str
+    HasCoSigner: str
+

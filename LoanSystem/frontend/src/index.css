@@ -1,1 +1,8 @@
-/* Cleared default vite styling */
+@import "tailwindcss";
+
+@theme {
+  --color-gray-900: #000000;
+  --color-gray-800: #111111;
+  --color-gray-700: #222222;
+  /* Add custom semantic colors here if needed */
+}

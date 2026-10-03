@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
 
-from database import users_collection
 from auth_router import get_current_admin
 from agent_service import create_agent
 
+from bson import ObjectId
+
+from database import users_collection, customers_collection
 
 router = APIRouter(
     prefix="/admin",
@@ -175,4 +177,51 @@ def activate_agent(
 
     return {
         "message": "Agent activated successfully"
+    }
+
+@router.put("/agents/{agent_id}/assign-customer/{customer_id}")
+def assign_customer_to_agent(
+    agent_id: str,
+    customer_id: str,
+    current_admin: dict = Depends(get_current_admin)
+):
+    # Validate IDs
+    if not ObjectId.is_valid(agent_id):
+        raise HTTPException(400, "Invalid agent ID")
+
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(400, "Invalid customer ID")
+
+    # Check agent exists and is active
+    agent = users_collection.find_one({
+        "_id": ObjectId(agent_id),
+        "role": "agent",
+        "is_active": True
+    })
+
+    if not agent:
+        raise HTTPException(404, "Active agent not found")
+
+    # Check customer exists
+    customer = customers_collection.find_one({
+        "_id": ObjectId(customer_id)
+    })
+
+    if not customer:
+        raise HTTPException(404, "Customer not found")
+
+    # Assign customer without creating duplicates
+    users_collection.update_one(
+        {"_id": ObjectId(agent_id)},
+        {
+            "$addToSet": {
+                "assigned_customers": customer_id
+            }
+        }
+    )
+
+    return {
+        "message": "Customer assigned to agent successfully",
+        "agent_id": agent_id,
+        "customer_id": customer_id
     }
