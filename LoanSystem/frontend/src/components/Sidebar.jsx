@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { FiGrid, FiUsers, FiFileText, FiBell, FiInfo, FiLogOut } from 'react-icons/fi';
+import { FiGrid, FiUsers, FiFileText, FiBell, FiInfo, FiLogOut, FiUploadCloud } from 'react-icons/fi';
 
 const Sidebar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -35,6 +35,10 @@ const Sidebar = () => {
         <NavLink to="/loans" className={navClass}>
           <FiFileText size={18} />
           <span>Loans</span>
+        </NavLink>
+        <NavLink to="/excel" className={navClass}>
+          <FiUploadCloud size={18} />
+          <span>Excel Analysis</span>
         </NavLink>
         <NavLink to="/alerts" className={navClass}>
           <FiBell size={18} />

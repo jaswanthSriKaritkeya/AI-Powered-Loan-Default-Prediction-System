@@ -10,6 +10,8 @@ import LoanDetails from './pages/LoanDetails';
 import Alerts from './pages/Alerts';
 import About from './pages/About';
 
+import ExcelAnalysis from './pages/ExcelAnalysis';
+
 function App() {
   return (
     <Router>
@@ -22,6 +24,7 @@ function App() {
             <Route path="customers" element={<Customers />} />
             <Route path="loans" element={<Loans />} />
             <Route path="loans/:loanId" element={<LoanDetails />} />
+            <Route path="excel" element={<ExcelAnalysis />} />
             <Route path="alerts" element={<Alerts />} />
             <Route path="about" element={<About />} />
           </Route>

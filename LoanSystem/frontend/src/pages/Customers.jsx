@@ -68,7 +68,7 @@ const Customers = () => {
         loan_purpose: loanData.LoanPurpose,
         has_cosigner: loanData.HasCoSigner
       });
-      navigate(`/loans/${res.data.loan._id || res.data.loan.loan_id || res.data.loan.id}`);
+      navigate(`/loans/${res.data.loan.loan_id || res.data.loan._id || res.data.loan.id}`);
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to create loan.');
       setCreating(false);

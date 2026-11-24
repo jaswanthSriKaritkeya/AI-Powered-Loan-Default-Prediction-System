@@ -13,7 +13,7 @@ from auth_router import router as auth_router
 from customers_router import router as customers_router
 from loans_router import router as loans_router
 from dashboard_router import router as dashboard_router
-
+from excel_router import router as excel_router
 from monitoring_service import monitor_due_loans
 
 
@@ -82,7 +82,7 @@ app.include_router(auth_router)
 app.include_router(customers_router)
 app.include_router(loans_router)
 app.include_router(dashboard_router)
-
+app.include_router(excel_router)
 
 # =========================================================
 # CORS

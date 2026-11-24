@@ -16,4 +16,4 @@ def risk_bucket(probablity):
 print(risk_bucket(0.12))  # Low Risk
 print(risk_bucket(0.32))  # Moderate Risk
 print(risk_bucket(0.63))  # High Risk
-print(risk_bucket(0.81))  # Critical
+print(risk_bucket(0.1))  # Critical

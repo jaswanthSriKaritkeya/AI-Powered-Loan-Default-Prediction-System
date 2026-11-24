@@ -10,7 +10,7 @@ def create_admin():
 
     name = input("Name: ").strip()
     email = input("Email: ").strip().lower()
-    password = getpass("Password: ")
+    password = getpass("Password: ");
 
     if not name or not email or not password:
 
