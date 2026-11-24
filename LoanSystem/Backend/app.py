@@ -96,7 +96,16 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+import time
+from fastapi import Request
 
+@app.middleware("http")
+async def add_process_time(request: Request, call_next):
+    start = time.perf_counter()
+    response = await call_next(request)
+    elapsed_ms = (time.perf_counter() - start) * 1000
+    response.headers["X-Process-Time-ms"] = f"{elapsed_ms:.1f}"
+    return response
 # =========================================================
 # HOME
 # =========================================================
