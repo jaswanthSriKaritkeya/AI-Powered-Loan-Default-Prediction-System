@@ -11,7 +11,7 @@ async def fetch_pan_details(pan: str):
 
     url = f"{PAN_API_URL}/pan/{pan}"
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
+    async with httpx.AsyncClient(timeout=60.0) as client:
 
         response = await client.get(url)
 

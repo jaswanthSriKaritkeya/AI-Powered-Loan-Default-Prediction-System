@@ -28,6 +28,9 @@ app.add_middleware(
 
 app.include_router(pan_router)
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.get("/")
 def home():

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';   // CHANGED: added useEffect
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
@@ -13,6 +13,11 @@ import About from './pages/About';
 import ExcelAnalysis from './pages/ExcelAnalysis';
 
 function App() {
+  // NEW: wake the backend (and through it, the PAN simulator) when the app loads
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}/health`).catch(() => {});
+  }, []);
+
   return (
     <Router>
       <AuthProvider>
